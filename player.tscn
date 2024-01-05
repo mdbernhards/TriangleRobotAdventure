@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://e24hucxkns67"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_i6bxg"]
+[ext_resource type="Texture2D" uid="uid://bx0tcnn6xxxue" path="res://art/robotV2.png" id="2_aisli"]
+[ext_resource type="AudioStream" uid="uid://bhex7s1krhl6p" path="res://art/Wiesulis x sangvn - Itālija.mp3" id="3_vk71m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o4wbv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_aisli")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qyqws"]
+radius = 17.0
+height = 84.0
+
+[node name="Player" type="CharacterBody2D"]
+platform_wall_layers = 1
+script = ExtResource("1_i6bxg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -5)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_o4wbv")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -4)
+shape = SubResource("CapsuleShape2D_qyqws")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_vk71m")
+volume_db = -11.0
+autoplay = true
